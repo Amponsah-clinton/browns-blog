@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 style="text-align: center; padding-bottom: 40px;">Manage Post</h1>
+
+    <!-- Add the search form -->
+    <form method="get" class="form-inline" style="margin-bottom: 20px;">
+        <div class="form-group mb-2">
+            <label for="search">Search:</label>
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+            <input type="text" class="form-control" id="search" name="q" placeholder="Search by title">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Search</button>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Category</th>
+                <th scope="col">Date</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in all_posts %}
+            <tr>
+                <td>{{ x.title }}</td>
+                <td>{{ x.post_category }}</td>
+                <td>{{ x.date }}</td>
+                <td>
+                    <a style="color: red;" href="#">Delete</a>
+                    /
+                    <a style="color: green;" href="{% url 'update_post' x.pk %}">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<br><br><br>
+{% endblock %}

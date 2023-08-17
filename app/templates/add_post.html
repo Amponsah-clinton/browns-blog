@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% if user.is_authenticated %}
+    
+    
+<div class="container mt-4">
+    <h1 style="text-align: center;">Create a new post</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.media}}
+        <div class="form-group">
+            <label for="{{ form.title.id_for_label }}">Title:</label>
+            {{ form.title }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.snippet.id_for_label }}">Snippet:</label>
+            {{ form.snippet }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.post_category.id_for_label }}">Post Category:</label><br>
+            <select class="form-control" id="{{ form.post_category.id_for_label }}" name="{{ form.post_category.html_name }}">
+                {% for cat in form.post_category.field.choices %}
+                    <option value="{{ cat.0 }}">{{ cat.1 }}</option>
+                {% endfor %}
+            </select>
+        </div><br>
+        <div class="form-group" style="padding-top: 10px;">
+            <label for="{{ form.details.id_for_label }}">Details:</label><br>
+            {{ form.details }}
+        </div>
+      
+        <div class="form-group">
+            <label for="{{ form.image.id_for_label }}">Image:</label>
+            {{ form.image }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.link.id_for_label }}">Link:</label>
+            {{ form.link }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<br><br><br>
+
+
+
+{% endif %}
+
+
+{% endblock %}
+

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% if user.is_authenticated %}
+
+
+<div class="container mt-4" style="padding: 50px 20rem 26rem 20rem;">
+    <h1  style="text-align: center; padding-bottom: 40px;">Create a new category</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+       
+</div>
+</form>
+<br><br><br>
+
+
+
+{% endif %}
+{% endblock %}
+

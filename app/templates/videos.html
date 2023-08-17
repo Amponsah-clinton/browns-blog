@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<main>
+    <!-- About US Start -->
+    <div class="about-area2 gray-bg pt-60 pb-60">
+        <div class="container">
+            <div class="row">
+                {% for video in video %}
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="whats-news-single mb-40 mb-40">
+                        <div class="whates-img">
+                            <img src="{{video.image.url}}" alt="">
+                        </div>
+                        <div class="whates-caption whates-caption2">
+                            <h4><a href="{{ video.link }}">{{ video.title }}</a></h4>
+                            <p>{{video.snippet}}</p>
+                            <span><i class="fa fa-clock"></i> {{ video.date }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

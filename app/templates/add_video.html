@@ -1,0 +1,36 @@
+<!-- add_video.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<br><br><br>
+<div class="container mt-4">
+    <h1 style="text-align: center;">Add a New Video</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.media }}
+        <div class="form-group">
+            <label for="{{ form.title.id_for_label }}">Title:</label>
+            {{ form.title }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.snippet.id_for_label }}">Title:</label>
+            {{ form.snippet }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.link.id_for_label }}">Link:</label>
+            {{ form.link }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.image.id_for_label }}">Image:</label>
+            {{ form.image }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div><br><br><br><br><br><br><br>
+
+{% endif %}
+{% endblock %}
+
+

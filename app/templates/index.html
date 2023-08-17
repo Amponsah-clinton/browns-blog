@@ -1,0 +1,322 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<main>
+    <div class="trending-area fix pt-25 gray-bg">
+        <div class="container">
+            <div class="trending-main">
+                <div class="row">
+                    {% if first_post %}
+                    <div class="col-lg-8">
+                        <div class="trending-top mb-30">
+                            <div class="trend-top-img">
+                                <img src="{{first_post.image.url}}" alt="">
+                                <div class="trend-top-cap">
+                                    <span class="bgr" data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">{{first_post.post_category}}</span>
+                                    <h2><a href="{% url 'details' first_post.pk %}" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">{{ first_post.title }}</a></h2>
+                                    <p data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms">by {{ first_post.user }} - {{ first_post.date }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="col-lg-4">
+                        <!-- Trending Top -->
+                        <div class="row">
+                            <!-- Display the second post -->
+                            {% if second_post %}
+                            <div class="col-lg-12 col-md-6 col-sm-6">
+                                <div class="trending-top mb-30">
+                                    <div class="trend-top-img">
+                                        <img src="{{second_post.image.url}}" alt="">
+                                        <div class="trend-top-cap trend-top-cap2">
+                                            <span class="bgb">{{ second_post.post_category }}</span>
+                                            <h2><a href="{% url 'details' second_post.pk  %}">{{ second_post.title }}</a></h2>
+                                            <p>by {{ second_post.user }} - {{ second_post.date }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                    
+                            <!-- Display the third post -->
+                            {% if third_post %}
+                            <div class="col-lg-12 col-md-6 col-sm-6">
+                                <div class="trending-top mb-30">
+                                    <div class="trend-top-img">
+                                        <!-- Use the image and other fields from the third post -->
+                                        <img src="{{third_post.image.url}}" alt="">
+                                        <div class="trend-top-cap trend-top-cap2">
+                                            <span class="bgg">{{ third_post.post_category }}</span>
+                                            <h2><a href="{% url 'details' second_post.pk  %}">{{ third_post.title }}</a></h2>
+                                            <p>by {{ third_post.user }} - {{ third_post.date }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="container" style="padding-bottom: 10px;">
+        <div class="section-tittle mb-30" style="padding-top: 10px;">
+            <h3>Trending News</h3>
+        </div>
+        <div class="card-deck">
+            {% for post in next_four_posts %}
+            <a href="{% url 'details' post.pk %}">
+                <div class="card">
+                    <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.snippet }}</p>
+                        <p class="card-text"><small class="text-muted">{{post.date}}</small>
+                            <small style="float:right ;"><a style="color:black !important" href="">{{ post.post_category }}</a></small>
+                        </p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    
+
+    <style>
+        @media screen and (min-width: 767px) {
+            .der {
+               height: 12rem;
+            }
+        }
+        
+    </style>
+
+{% comment %} 
+    <div class="container" style="padding-bottom: 10px">
+        <div class="section-tittle mb-30" style="padding-top: 10px;">
+            <h3>Trending News</h3>
+        </div>
+        <div class="card-deck">
+            {% for post in posts_4_to_8 %}
+                <a href="{% url 'details' post.pk %}">
+                    <div class="card">
+                        <img class="card-img-top der" src="{{post.image.url}}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <p class="card-text">{{ post.snippet }}</p>
+                            <p class="card-text">
+                                <small class="text-muted">3 mins ago</small>
+                                <small style="float:right ;background-color:rgb(215, 51, 138); padding:0.8px 4px">
+                                    <a style="color:rgb(255, 255, 255) !important" href="">{{ post.post_category }}</a>
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+    
+                <a href="{% url 'details' post.pk %}">
+                    <div class="card">
+                        <img class="card-img-top der" src="{{post.image.url}}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <p class="card-text">{{ post.snippet }}</p>
+                            <p class="card-text">
+                                <small class="text-muted">3 mins ago</small>
+                                <small style="float:right ;background-color:rgb(215, 51, 138); padding:0.8px 4px">
+                                    <a style="color:rgb(255, 255, 255) !important" href="">{{ post.post_category }}</a>
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+     {% endcomment %}
+      
+
+    <style>
+        @media screen and (max-width: 767px) {
+            #none {
+                display: none;
+            }
+        }
+    </style>
+    
+
+
+    <div  style="padding: 60px 0px 40px 0px;">
+    <div id="none" class="trending-area fix pt-25 gray-bg text-center" style="padding: 40px 0px;">
+        <div class="container text-center">
+            <div class="row">
+                <!-- Column 1 - Large Screen -->
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <img src="{% static 'assets/img/adapt_icon/1.png'%}" alt="" class="img-fluid">
+                </div>
+    
+                <!-- Column 2 - Large Screen -->
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <img src="{% static 'assets/img/adapt_icon/2.png'%}" alt="" class="img-fluid">
+                </div>
+    
+                <!-- Column 3 - Large Screen -->
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <img src="{% static 'assets/img/adapt_icon/3.png'%}" alt="" class="img-fluid">
+                </div>
+    
+                <!-- Column 4 - Large Screen -->
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <img src="{% static 'assets/img/adapt_icon/1.png'%}" alt="" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+ 
+
+
+
+
+
+<div class="container-fluid text-center" style="padding-top: 10px;">
+    <div class="row">
+        {% for advert_obj in adverts %}
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <img src="{{ advert_obj.ads_file.url }}" alt="" class="img-fluid">
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+   
+    <!-- Weekly3-News start -->
+<div class="weekly3-news-area pt-80 pb-130">
+    <div class="container">
+        <div class="section-tittle mb-30" style="padding-top: 10px;">
+            <h3>Trending Videos</h3>
+        </div>
+        <div class="weekly3-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="slider-wrapper">
+                        <!-- Slider -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="weekly3-news-active dot-style d-flex">
+                                    {% for video in last_five_videos %}
+                                    <div class="weekly3-single">
+                                        <div class="weekly3-img">
+                                            <img src="{{ video.image.url }}" alt="">
+                                        </div>
+                                        <div class="weekly3-caption">
+                                            <h4><a href="{{ video.link }}">{{ video.title }}</a></h4>
+                                            <p>{{ video.date }}</p>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Weekly-News -->
+
+
+
+</main>
+
+
+
+<div class="container" style="padding-bottom: 10px;">
+    <div class="section-tittle mb-30" style="padding-top: 10px;">
+        <h3>Hot Political News</h3>
+    </div>
+    <div class="card-deck">
+        <!-- Loop through the entertainment_posts and display them -->
+        {% for post in entertainment_posts %}
+        <a href="{% url 'details' post.pk %}">
+            <div class="card">
+                <img id="der" class="card-img-top" src="{{post.image.url}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.snippet }}</p>
+                    <p class="card-text"><small class="text-muted">3 mins ago</small>
+                        <small style="float:right ;" ><a style="color:black !important" href="">{{ post.post_category }}</a></small>
+                    </p>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+
+    <!-- Weekly3-News start -->
+    <div class="weekly3-news-area pt-80 pb-130">
+        <div class="container">
+            <div class="section-tittle mb-30" style="padding-top: 10px;">
+                <h3>Trending Entertainment News</h3>
+            </div>
+            <div class="weekly3-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="slider-wrapper">
+                            <!-- Slider -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="weekly3-news-active dot-style d-flex">
+                                        {% for video in first_five_politics_videos %}
+                                        <div class="weekly3-single">
+                                            <div class="weekly3-img">
+                                                <img src="{{ video.image.url }}" alt="">
+                                            </div>
+                                            <div class="weekly3-caption">
+                                                <h4><a href="{% url 'details' video.pk %}">{{ video.title }}</a></h4>
+                                                <p>{{ video.date }}</p>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Weekly-News -->
+
+
+
+
+
+
+
+{% endblock content %}
